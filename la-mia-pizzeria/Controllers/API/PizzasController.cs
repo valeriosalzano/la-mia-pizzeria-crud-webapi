@@ -62,7 +62,7 @@ namespace la_mia_pizzeria.Controllers.API
         }
 
         [HttpPut("{pizzaId}")]
-        public IActionResult ModifyPizza(int pizzaId, Pizza modifiedPizza)
+        public IActionResult ModifyPizza(int pizzaId,[FromBody] Pizza modifiedPizza)
         {
             Pizza? originalPizza = _pizzaManager.GetById(pizzaId);
 
@@ -74,6 +74,7 @@ namespace la_mia_pizzeria.Controllers.API
             {
                 try
                 {
+                    modifiedPizza.Slug = Helper.GetSlugFromString(modifiedPizza.Name);
                     _pizzaManager.Update(originalPizza, modifiedPizza);
                     return Ok();
                 }catch (Exception ex)
