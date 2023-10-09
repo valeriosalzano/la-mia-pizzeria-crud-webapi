@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace la_mia_pizzeria.Database
 {
@@ -31,16 +32,21 @@ namespace la_mia_pizzeria.Database
         public void Add(T entity)
         {
             _dbSet.Add(entity);
+            _context.SaveChanges();
         }
 
-        public void Update(T entity)
+        public void Update(T originalEntity, T modifiedEntity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
+            EntityEntry contextOriginalEntity = _context.Entry(originalEntity);
+            contextOriginalEntity.CurrentValues.SetValues(modifiedEntity);
+            contextOriginalEntity.State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);
+            _context.SaveChanges();
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using la_mia_pizzeria.Database;
 using la_mia_pizzeria.Models;
+using la_mia_pizzeria.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace la_mia_pizzeria.Controllers.API
 {
@@ -17,23 +19,24 @@ namespace la_mia_pizzeria.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetPizzas()
+        public IActionResult GetAllPizzas()
         {
-            List<Pizza> pizzas = (List<Pizza>) _pizzaManager.GetAll();
+            List<Pizza> pizzaList = (List<Pizza>) _pizzaManager.GetAll();
 
-            return Ok(pizzas);
+            return Ok(pizzaList);
         }
 
         [HttpGet]
-        public IActionResult FindPizzasByName(string? name)
+        public IActionResult GetAllPizzasContainingName(string? pizzaName)
         {
-            return Ok(_pizzaManager.GetAllContaining(name));
+            List<Pizza> foundPizzas = _pizzaManager.GetAllContaining(pizzaName);
+            return Ok(foundPizzas);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult PizzaById(int id)
+        [HttpGet("{pizzaId}")]
+        public IActionResult GetPizzaById(int pizzaId)
         {
-            Pizza? foundPizza = _pizzaManager.GetById(id);
+            Pizza? foundPizza = _pizzaManager.GetById(pizzaId);
             if (foundPizza is null) 
             {
                 return NotFound();
@@ -44,5 +47,61 @@ namespace la_mia_pizzeria.Controllers.API
             }
         }
 
+        [HttpPost]
+        public IActionResult CreatePizza([FromBody] Pizza newPizza)
+        {
+            newPizza.Slug = Helper.GetSlugFromString(newPizza.Name);
+            try
+            {
+                _pizzaManager.Add(newPizza);
+                return Ok();
+            }catch(Exception ex)
+            {
+                return BadRequest( new { Message = ex.Message });
+            }
+        }
+
+        [HttpPut("{pizzaId}")]
+        public IActionResult ModifyPizza(int pizzaId, Pizza modifiedPizza)
+        {
+            Pizza? originalPizza = _pizzaManager.GetById(pizzaId);
+
+            if(originalPizza is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                try
+                {
+                    _pizzaManager.Update(originalPizza, modifiedPizza);
+                    return Ok();
+                }catch (Exception ex)
+                {
+                    return BadRequest(new { Message = ex.Message });
+                }
+            }
+        }
+
+        [HttpDelete("{pizzaId}")]
+        public IActionResult DeletePizza(int pizzaId)
+        {
+            Pizza? markedPizza = _pizzaManager.GetById(pizzaId);
+            if(markedPizza is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                try
+                {
+                    _pizzaManager.Delete(markedPizza);
+                    return Ok();
+                }catch( Exception ex)
+                {
+                    return BadRequest(new {Message = ex.Message});
+                }
+            }
+        }
     }
 }

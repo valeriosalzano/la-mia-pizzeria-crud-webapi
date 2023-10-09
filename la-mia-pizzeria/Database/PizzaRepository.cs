@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Database
 {
-    public class PizzaRepository : EntityFrameworkRepository<Pizza>
+    public class PizzaRepository : EntityFrameworkRepository<Pizza>, IRepository<Pizza>
     {
-        public PizzaRepository(DbContext context) : base(context)
+        public PizzaRepository(PizzeriaContext context) : base(context)
         {
         }
 
