@@ -1,5 +1,4 @@
-﻿using la_mia_pizzeria.Interfaces;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace la_mia_pizzeria.CustomLoggers
 {

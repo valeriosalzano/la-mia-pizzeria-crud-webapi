@@ -1,6 +1,5 @@
 using la_mia_pizzeria.CustomLoggers;
 using la_mia_pizzeria.Database;
-using la_mia_pizzeria.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

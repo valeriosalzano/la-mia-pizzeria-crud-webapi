@@ -1,6 +1,4 @@
-﻿using la_mia_pizzeria.Interfaces;
-
-namespace la_mia_pizzeria.CustomLoggers
+﻿namespace la_mia_pizzeria.CustomLoggers
 {
     public class CustomFileLogger : ICustomLogger
     {

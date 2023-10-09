@@ -1,12 +1,12 @@
-﻿using la_mia_pizzeria.Database;
-using la_mia_pizzeria.Interfaces;
+﻿using la_mia_pizzeria.CustomLoggers;
+using la_mia_pizzeria.Database;
 using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly ICustomLogger _logger;

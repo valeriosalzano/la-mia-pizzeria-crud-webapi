@@ -1,4 +1,4 @@
-﻿namespace la_mia_pizzeria.Interfaces
+﻿namespace la_mia_pizzeria.CustomLoggers
 {
     public interface ICustomLogger
     {
