@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "Admin/_Layout";
+    ViewData["Title"] = $"Pizza Details";
+}
+
+@model Pizza;
+
+<div class="container-fluid py-3">
+    <div class="card wrapper shadow position-relative overflow-hidden">
+        <img src="@Model.ImgPath" class="pizza-img details-img-top card-img-top position-absolute ratio ratio-1x1" alt="ceci n'est past une pizza">
+      <div class="card-body details-card">
+        <h5 class="card-title display-5 ps-2" id="pizza-name">@Model.Name</h5>
+        <p class="card-text fs-4 ps-3">@Model.Description</p>
+        <ul class="list-group list-group-flush details-list">
+                <li class="list-group-item bg-transparent"> <span class="fs-6 fw-bold">Price: &euro;</span>@Model.Price</li>
+                <li class="list-group-item bg-transparent"> <span class="fs-6 fw-bold">Category: </span>@(string.IsNullOrEmpty(Model.Category?.Name) ? "N/N" : Model.Category?.Name)</li>
+                <li class="list-group-item bg-transparent">
+                    <span class="fs-6 fw-bold">Ingredients: </span>
+            @if (Model.Ingredients is not null && Model.Ingredients.Count > 0)
+            {
+                @foreach(Ingredient ingredient in Model.Ingredients)
+                {
+                        <span class="badge rounded-pill bg-secondary">@ingredient.Name</span>
+                }
+            }
+            else
+            {
+                <span>No ingredients found.</span>
+            }
+        </li>
+                <li class="list-group-item bg-transparent"><span class="fs-6 fw-bold">Image Path: </span>@(Model.ImgPath == "" ? "N/N" : Model.ImgPath)</li>
+                <li class="list-group-item bg-transparent"><span class="fs-6 fw-bold">Slug: </span>@Model.Slug</li>
+        </ul>
+        <div class="d-flex justify-content-center">
+        <a class="btn btn-primary me-2" href="@Url.Action("Index","Pizza")">Return to List</a>
+            @if (User.IsInRole("SUPERADMIN"))
+            {
+                <a href="@Url.Action("Edit","Pizza", new {slug = Model.Slug})" class="btn btn-warning px-2 me-2">
+                    Modify <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <form asp-action="Delete" asp-route-slug="@Model.Slug" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger btn-sweet-delete px-2 me-2">
+                        Delete <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
+            }
+        </div>
+      </div>
+    </div>
+</div>
+
+<partial name="Admin/Partials/_PizzaDeleteModal" />
+
+@section Scripts {
+    <script src="~/js/sweet-delete.js"></script>
+}

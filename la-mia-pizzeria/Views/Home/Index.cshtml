@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "Guest/_Layout";
+    ViewData["Title"] = "Home page";
+}
+@model List<Pizza>
+
+<section id="banner-section">
+	<div class="container d-lg-flex align-items-center">
+		<div class="img-container text-center">
+			<img class="img-fluid" src="~/img/logoSeaShark.png" />
+		</div>
+		<div>
+			<h1 class="display-1 text-center"> Are you <br /> <span class="highlighted-word">hungry</span> ?</h1>
+		</div>
+	</div>
+</section>
+
+<section id="order-section" class="order-bg">
+	<div class="order-top"><img class="w-100" src="~/img/section-top.png" alt="layer"></div>
+	<div class="container py-3">
+		<div class="row text-center">
+			<div class="col-xl-4 col-lg-4 col-md-4">
+				<div class="img-container rounded-circle ratio ratio-1x1 mx-auto">
+					<img src="~/img/order-1.svg" alt="order" class="img-fluid">
+				</div>
+				<h2 class="fs-3 my-2 text-uppercase">order your Food</h2>
+				<p class="order-des">
+					Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-
+				</p>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4">
+				<div class="img-container rounded-circle ratio ratio-1x1 mx-auto">
+					<img src="~/img/order-2.svg" alt="delivery" class="img-fluid">
+				</div>
+				<h2 class="fs-3 my-2 text-uppercase">delivery or pick up</h2>
+				<p class="order-des">
+					Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-
+				</p>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4">
+				<div class="img-container rounded-circle ratio ratio-1x1 mx-auto">
+					<img src="~/img/order-3.svg" alt="delicious" class="img-fluid">
+				</div>
+				<h2 class="fs-3 my-2 text-uppercase">delicious receipe</h2>
+				<p class="order-des">
+					Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-Lorem ipsum dolor sit amet, consectetur
+					adipisicing elit, sed do eius-
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="order-bottom"><img class="w-100" src="~/img/section-bottom.png" alt="layer"></div>
+</section>
+
+<section id="our-pizzas">
+	<div class="container py-3">
+		<h2 class="display-3 text-center">Our <span class="highlighted-word">special</span> pizzas</h2>
+		<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+			@foreach (Pizza pizza in Model)
+			{
+				<div class="col">
+					<div class="card h-100 shadow">
+						<img src="@pizza.ImgPath" class="card-img-top pizza-img" alt="">
+						<div class="card-body">
+							<h5 class="card-title"> @pizza.Name</h5>
+							<p class="card-text"> @pizza.Description</p>
+						</div>
+						<div class="card-footer">
+							<small class="text-body-secondary">&euro; @pizza.Price</small>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
