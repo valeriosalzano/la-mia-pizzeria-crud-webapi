@@ -32,6 +32,11 @@ namespace la_mia_pizzeria_static.Controllers
             }
         }
 
+        public IActionResult Create()
+        {
+            return View("Create");
+        }
+
         public IActionResult PopulateDb()
         {
             try

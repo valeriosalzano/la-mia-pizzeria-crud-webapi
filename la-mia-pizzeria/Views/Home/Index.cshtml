@@ -99,6 +99,43 @@
 	</div>
 </section>
 
+<section id="create-pizzas">
+	<div class="container py-3 text-center">
+		<h2 class="display-3 text-center my-3"> Still missing? <span class="highlighted-word">create</span> it!</h2>
+
+		<button id="create-pizza-btn" class="btn btn-primary px-5 py-2">Create a Pizza</button>
+	</div>
+</section>
+
+<div id="manipulate-pizza-data" class="container position-fixed d-none top-50 start-50 translate-middle bg-white rounded-2 border p-3 shadow">
+	<h2 class="display-3 text-center my-3"> Your <span class="highlighted-word">customized</span> pizza!</h2>
+	<div class="loader text-center d-none">
+		<span class="spinner-border" role="status"></span>
+		<p> Please wait...</p>
+	</div>
+	<div class="error-data d-none text-center">
+		<p class="fs-4"></p>
+	</div>
+	<div class="data-list">
+		<div class="input-group mb-3">
+			<span class="input-group-text"> Name </span>
+			<input type="text" class="form-control" id="name">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text"> Price </span>
+			<input type="number" step="0.01" class="form-control" id="price">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text"> Image Path </span>
+			<input type="number" step="0.01" class="form-control" id="imgPath">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Write a description...</span>
+			<textarea class="form-control" id="description"></textarea>
+		</div>
+		<button class="btn btn-primary submit-btn">Submit</button>
+	</div>
+</div>
 @section Scripts {
 	<script src="~/js/home.js" asp-append-version="true"></script>
 }
