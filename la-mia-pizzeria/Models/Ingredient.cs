@@ -11,6 +11,6 @@ namespace la_mia_pizzeria.Models
         [Column(name: "name"),Required(AllowEmptyStrings = false)]
         public string? Name { get; set; }
 
-        public List<Pizza>? Pizza { get; set; }
+        public List<Pizza>? Pizzas { get; set; }
     }
 }

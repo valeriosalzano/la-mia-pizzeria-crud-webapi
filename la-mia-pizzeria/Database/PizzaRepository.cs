@@ -19,13 +19,13 @@ namespace la_mia_pizzeria.Database
             if (!string.IsNullOrEmpty(name))
             {
                 if (includeEverything)
-                    return _dbSet
+                    foundPizzas = _dbSet
                         .Where(pizza => pizza.Name!.ToLower().Contains(name.ToLower()))
                         .Include(pizza => pizza.Category)
                         .Include(pizza => pizza.Ingredients)
                         .ToList();
                 else
-                    return (List<Pizza>) base.GetFilteredList(pizza => pizza.Name!.ToLower().Contains(name.ToLower()));
+                    foundPizzas = (List<Pizza>) base.GetFilteredList(pizza => pizza.Name!.ToLower().Contains(name.ToLower()));
             }
 
             return foundPizzas;
@@ -41,6 +41,18 @@ namespace la_mia_pizzeria.Database
                     .First();
             else
                 return base.GetById(id);
+        }
+
+        public Pizza? GetBySlug(string slug, bool includeEverything)
+        {
+            if (includeEverything)
+                return base._dbSet
+                    .Include(pizza => pizza.Category)
+                    .Include(pizza => pizza.Ingredients)
+                    .Where(pizza => pizza.Slug == slug)
+                    .First();
+            else
+                return base._dbSet.Where(pizza => pizza.Slug == slug).First();
         }
 
         public IEnumerable<Pizza> GetFilteredList(Func<Pizza, bool> filter, bool includeEverything)

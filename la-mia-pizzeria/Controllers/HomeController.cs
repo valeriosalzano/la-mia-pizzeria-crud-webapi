@@ -22,8 +22,8 @@ namespace la_mia_pizzeria_static.Controllers
         {
             try
             {
-                List<Pizza> pizzas = _database.Pizzas.ToList<Pizza>();
-                return View("Index", pizzas);
+                //List<Pizza> pizzas = _database.Pizzas.ToList<Pizza>();
+                return View("Index");
             }
             catch
             {
