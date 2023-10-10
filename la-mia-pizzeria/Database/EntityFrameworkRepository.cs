@@ -5,8 +5,8 @@ namespace la_mia_pizzeria.Database
 {
     public class EntityFrameworkRepository<T> : IRepository<T> where T : class
     {
-        private readonly DbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbContext _context;
+        protected readonly DbSet<T> _dbSet;
 
         public EntityFrameworkRepository(DbContext context)
         {

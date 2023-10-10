@@ -12,6 +12,7 @@ using Azure;
 using Microsoft.AspNetCore.Authorization;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 using la_mia_pizzeria.CustomLoggers;
+using Microsoft.AspNetCore.Identity;
 
 namespace la_mia_pizzeria.Controllers
 {

@@ -19,7 +19,7 @@ namespace la_mia_pizzeria.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetAllPizzas()
+        public IActionResult GetAll()
         {
             List<Pizza> pizzaList = (List<Pizza>) _pizzaManager.GetAll();
 
@@ -27,16 +27,16 @@ namespace la_mia_pizzeria.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetAllPizzasContainingName(string? pizzaName)
+        public IActionResult GetAllContaining(string? name)
         {
-            List<Pizza> foundPizzas = _pizzaManager.GetAllContaining(pizzaName);
+            List<Pizza> foundPizzas = _pizzaManager.GetAllContaining(name, true);
             return Ok(foundPizzas);
         }
 
         [HttpGet("{pizzaId}")]
-        public IActionResult GetPizzaById(int pizzaId)
+        public IActionResult GetById(int pizzaId)
         {
-            Pizza? foundPizza = _pizzaManager.GetById(pizzaId);
+            Pizza? foundPizza = _pizzaManager.GetById(pizzaId, true);
             if (foundPizza is null) 
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace la_mia_pizzeria.Controllers.API
         }
 
         [HttpPost]
-        public IActionResult CreatePizza([FromBody] Pizza newPizza)
+        public IActionResult Create([FromBody] Pizza newPizza)
         {
             newPizza.Slug = Helper.GetSlugFromString(newPizza.Name);
             try

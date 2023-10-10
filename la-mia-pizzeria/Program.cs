@@ -26,6 +26,7 @@ namespace la_mia_pizzeria_static
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddScoped<ICustomLogger, CustomFileLogger>();
+            builder.Services.AddScoped<DbContext, PizzeriaContext>();
             builder.Services.AddScoped<PizzeriaContext, PizzeriaContext>();
             builder.Services.AddScoped<PizzaRepository, PizzaRepository>();
 

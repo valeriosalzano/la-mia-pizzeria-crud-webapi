@@ -32,6 +32,18 @@ namespace la_mia_pizzeria_static.Controllers
             }
         }
 
+        public IActionResult PopulateDb()
+        {
+            try
+            {
+                DataSeeder.PopulateDb();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View("Index");
+            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
